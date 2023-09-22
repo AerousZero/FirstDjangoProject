@@ -7,7 +7,6 @@ media
 
 # Backup files # 
 *.bak 
-
 # If you are using PyCharm # 
 # User-specific stuff
 .idea/**/workspace.xml
@@ -135,4 +134,4 @@ GitHub.sublime-settings
 !.vscode/extensions.json 
 .history
 
-FirstDjangoProject
+env.py

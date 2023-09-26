@@ -1,0 +1,4 @@
+Introduction to django
+settings and urls
+Templates
+Models

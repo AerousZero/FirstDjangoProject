@@ -1,0 +1,14 @@
+ORM 
+it stands for object relational mapping
+it is a way to query a database without using an actual database query
+we use python object to query the database
+
+ORM examples
+
+
+Let'S take "student" as a db Table.
+
+READ
+student = student.objects.all()
+print(student)
+

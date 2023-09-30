@@ -1,4 +1,5 @@
 Introduction to django
-settings and urls
-Templates
+App Introduction and Templates
+Template inheritance
 Models
+model Relations

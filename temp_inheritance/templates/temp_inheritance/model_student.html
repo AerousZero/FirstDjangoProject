@@ -6,9 +6,13 @@
     <thead>
     <tr>
         <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Email</th>
+        <th scope="col">name</th>
+        <th scope="col">email</th>
         <th scope="col">age</th>
+        <th scope="col">roll</th>
+        <th scope="col">address</th>
+        <th scope="col">phone</th>
+        <th scope="col">classname</th>
     </tr>
     </thead>
     {%for value in student%}
@@ -18,6 +22,10 @@
         <td>{{value.name}}</td>
         <td>{{value.email}}</td>
         <td>{{value.age}}</td>
+        <td>{{value.studentprofile.roll}}</td>
+        <td>{{value.studentprofile.address}}</td>
+        <td>{{value.studentprofile.phone}}</td>
+        <td>{{value.classroom.name}}</td>
     </tr>
     </tbody>
     {%endfor%}

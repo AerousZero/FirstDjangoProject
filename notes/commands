@@ -4,6 +4,7 @@ python manage.py startapp <app_name>
 python manage.py makemigrations
 python manage.py migrate
 python manage.py shell
+python manage.py shell_plus
 
 python manage.py createsuperuser
 
@@ -31,7 +32,7 @@ Initialize A Repository In Local
 2. git status => Check the current status of the repo
 3. git add . => Add all the changes to git repo
 4. git commit -m "<commit-message>"
-
+5. git push
 
 
 git init
@@ -46,3 +47,12 @@ pip freeze > requirements.txt
 pip install -r requirements.txt
 
 
+POSTGRES DB
+start a psql shell:
+psql -u postgres (windows)
+
+sudo -i -u postgres (linux)
+
+for mac open shell 
+
+CREATE DATABASE (name); (create a new DB)

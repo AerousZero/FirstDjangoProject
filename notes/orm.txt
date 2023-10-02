@@ -103,3 +103,9 @@ ClassRoom.objects.filter(classroom_students__name="srijan")
 if profile is made or not
 student.objects.filter(studentprofile__address__isnull = False)
 
+
+
+A. Manytomany
+Adding
+A2.publications.add(P1)
+P1.article_set.add(A2) .relatedname for child class

@@ -109,3 +109,18 @@ A. Manytomany
 Adding
 A2.publications.add(P1)
 P1.article_set.add(A2) .relatedname for child class
+
+
+filtering
+>>> Article.objects.filter(publications=1) 
+<QuerySet [<Article: Article object (1)>, <Article: Article object (2)>]>
+>>> Publication.objects.filter(article=1)  
+<QuerySet [<Publication: Publication object (1)>, <Publication: Publication object (2)>]>
+
+removing
+A2.publications.remove(P1) from child
+>>> P1.article_set.remove(A1) from parent
+
+bridge table variable
+APT = Article.publications.through
+>>> APT.objects.all()

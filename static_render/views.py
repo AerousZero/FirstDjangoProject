@@ -6,4 +6,4 @@ def staticHome(request):
     return render(request, 'static_render/staticHome.html', {'title':'Static'})
 
 def Portfolio(request):
-    return render(request, 'static_render/index.html', {'title':'Portfolio'})
+    return render(request, 'static_render/index.html', {'title':'Srijan Shakya'})

@@ -1,15 +1,17 @@
-{% extends 'crud/base.html' %}
+{% extends 'crud/base.html' %} {%block content%}
 
-
-{%block content%}
-
-    <h1>{{title}}</h1>
-    <form method="post" action="{% url 'classroom_update' classroom.id %}">
-        {% csrf_token %}
-        <label>Name</label>
-        <input class="form-control" style="width:30%" name="name" value="{{classroom.name}}">
-        <br>
-        <button class="btn btn-success" type="submit"> Submit </button>
-    </form>
+<h1>{{title}}</h1>
+<form method="post" action="{% url 'classroom_update' classroom.id %}">
+  {% csrf_token %}
+  <label>Name</label>
+  <input
+    class="form-control"
+    style="width: 30%"
+    name="name"
+    value="{{classroom.name}}"
+  />
+  <br />
+  <button class="btn btn-success" type="submit">Submit</button>
+</form>
 
 {%endblock%}

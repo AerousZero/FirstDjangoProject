@@ -1,12 +1,9 @@
-{% extends 'crud/base.html' %}
+{% extends 'crud/base.html' %} {%block content%}
 
-
-{%block content%}
-
-    <h1>You are on Delete Confirmation {{ classroom.name }} </h1>
-    <form method="post" action="{% url 'classroom_delete' classroom.id %}">
-        {% csrf_token %}
-        <a class="btn btn-dark" href="{% url 'crud_classroom' %}">Cancel</a>
-        <button class="btn btn-danger" type="submit"> Delete </button>
-    </form>
+<h1>You are on Delete Confirmation {{ classroom.name }}</h1>
+<form method="post" action="{% url 'classroom_delete' classroom.id %}">
+  {% csrf_token %}
+  <a class="btn btn-dark" href="{% url 'crud_classroom' %}">Cancel</a>
+  <button class="btn btn-danger" type="submit">Delete</button>
+</form>
 {%endblock%}

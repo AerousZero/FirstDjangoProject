@@ -12,10 +12,10 @@
       {% if student.studentprofile.profilePic %}
       <img
         src="{{student.studentprofile.profilePic.url}}"
-        style="height: 300px"
+        style="height: 250px"
       />
       {% else %}
-      <img src="{% static 'crud/default.png' %}" style="height: 300px" />
+      <img src="{% static 'crud/default.png' %}" style="height: 250px" />
       {% endif %} <br />
       <input type="file" name="pp" />
     </div>
@@ -72,6 +72,19 @@
           name="phone"
           value="{{student.studentprofile.phone}}"
         />
+      </div>
+      <div class="col-md-4">
+        <label for="inputState" class="form-label">Classroom</label>
+        <select id="inputState" class="form-select" name="class_id" >
+
+          {% for class in classes %}
+    
+          <option value = {{class.id}}>{{class.name}}</option>
+    
+          {%  endfor %}
+
+        </select>
+        
       </div>
       <br /><br />
       <button type="submit" class="btn btn-outline-success">Submit</button>

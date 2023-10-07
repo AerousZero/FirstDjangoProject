@@ -48,7 +48,7 @@ def add_student(request):
             pp = request.FILES.get('pp')
             address = request.POST.get("address")
             phone = request.POST.get("phone")
-            class_id= request.POST.get("classId")
+            class_id= request.POST.get("class_id")
 
             std = Student.objects.create(
                 name=name, email=email, age=age, classroom_id=class_id)
@@ -77,8 +77,11 @@ def student_update(request, id):
                   address = request.POST.get("address")
                   phone = request.POST.get("phone")
                   pp = request.FILES.get("pp")
+                  classId= request.POST.get("class_id")
+
                   Student.objects.filter(id=id).update(
-                  name=name, email=email, age=age)
+                  name=name, email=email, age=age, classroom_id=classId)
+
                   sp, _ = StudentProfile.objects.update_or_create(
                   student=std, defaults={"address": address, "phone": phone})
 
@@ -86,5 +89,17 @@ def student_update(request, id):
                         sp.profilePic = pp
                         sp.save()
                   return redirect('student_detail', std.id)
+      
+                  
 
-      return render(request, 'crud/student_update.html', {"title":"Student Update","student": std})
+      return render(request, 'crud/student_update.html', {"title":"Student Update","student": std, "classes":ClassRoom.objects.all()})
+
+def student_delete(request, id):
+        std = Student.objects.get(id=id)
+
+        if request.method == "POST":
+             
+             std.delete()
+             return redirect('crud_student')
+
+        return render(request, 'crud/student_delete.html', {"title": "Delete Student", "student": std})

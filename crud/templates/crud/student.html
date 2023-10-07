@@ -29,7 +29,7 @@
             <td>{{student.classroom.name}}</td>
             <td>
                 <a class="btn btn-outline-warning" href="{% url 'student_detail' student.id %}">Detail</a> 
-                <a class="btn btn-danger" href="#">Delete</a>
+                <a class="btn btn-outline-danger" href="{% url 'student_delete' student.id %}">Delete</a>
             </td>
         </tr>
         </tbody>

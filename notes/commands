@@ -1,3 +1,6 @@
+python -m venv <env> name of environment
+
+
 django-admin startproject <project_name>
 python manage.py runserver
 python manage.py startapp <app_name>
@@ -7,7 +10,7 @@ python manage.py shell
 python manage.py shell_plus
 
 python manage.py createsuperuser
-
+pip install django
 pip install django_extensions
 
 

@@ -3,7 +3,7 @@ from typing import Any
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView, CreateView, ListView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView
 
 from crud.models import ClassRoom, Student , StudentProfile
 from .forms import ClassRoomForm, ClassRoomModelForm
@@ -87,3 +87,11 @@ class StudentListView(ListView):
         context = super().get_context_data(*args, **kwargs)
         print(context)
         return context
+    
+
+class StudentDetailView(DetailView):
+    queryset = Student.objects.all()
+    template_name = "classbased/student_detail.html"
+    slug_url_kwarg = "id"
+    
+    

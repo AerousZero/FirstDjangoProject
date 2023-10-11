@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import hello_world , MessageView, SimpleStudentView, SimpleStudentListView
+from .views import hello_world , MessageView, SimpleStudentView, SimpleStudentListView, ClassRoomDetailAPIView ,ClassRoomAPIView, StudentDetailAPIView, StudentAPIView
 
 urlpatterns = [
     path('hello-world/',hello_world),
@@ -7,3 +7,13 @@ urlpatterns = [
     path('simple-student/<int:id>/',SimpleStudentView.as_view()),
     path('simple-student-list/',SimpleStudentListView.as_view())
 ]
+
+urls_serializers = [
+    path('classroom/<int:id>', ClassRoomDetailAPIView.as_view()),
+    path('classroom/', ClassRoomAPIView.as_view()),
+    path('student/<int:id>', StudentDetailAPIView.as_view()),
+    path('student/', StudentAPIView.as_view()),
+
+]
+
+urlpatterns += urls_serializers

@@ -5,9 +5,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from crud.models import Student, ClassRoom
+from crud.models import Student, ClassRoom, StudentProfile
 
-from .serializers import ClassRoomSerializer , ClassRoomModelSerializer ,StudentModelSerializer
+from .serializers import ClassRoomSerializer , ClassRoomModelSerializer ,StudentModelSerializer, StudentProfileModelSerializer
 
 # Create your views here.
 def hello_world(request):
@@ -126,5 +126,21 @@ class StudentAPIView(APIView):
     
     def get(self, *args, **kwargs):
         stds = Student.objects.all()
-        serializer = StudentModelSerializer(stds, many=True)
+        serializer = StudentModelSerializer(stds, many=True , context ={"request": self.request})
         return Response(serializer.data)
+    
+class StudentProfileAPIView(APIView):
+    def get(self, *args, **kwargs):
+        sp = StudentProfile.objects.all()
+        ser = StudentProfileModelSerializer(sp, many=True, context = {"request": self.request})
+        return Response(ser.data)
+
+    def post(self, *args, **kwargs):
+        ser = StudentProfileModelSerializer(data=self.request.data)
+        ser.is_valid(raise_exception = True)
+        ser.save()
+        return Response (ser.data, status=status.HTTP_201_CREATED)
+        
+    
+    
+

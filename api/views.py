@@ -2,6 +2,7 @@
 from django.http import JsonResponse
 
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView , CreateAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -141,6 +142,32 @@ class StudentProfileAPIView(APIView):
         ser.save()
         return Response (ser.data, status=status.HTTP_201_CREATED)
         
-    
-    
+class ClassRoomListAPIView(ListAPIView):
+    queryset = ClassRoom.objects.all()
+    serializer_class = ClassRoomModelSerializer
 
+
+class ClassRoomCreateAPIView(CreateAPIView):
+    queryset = ClassRoom.objects.all()
+    serializer_class = ClassRoomModelSerializer
+
+
+class ClassRoomRetrieveAPIView(RetrieveAPIView):
+    queryset = ClassRoom.objects.all()
+    serializer_class = ClassRoomModelSerializer
+
+class ClassRoomUpdateAPIView(UpdateAPIView):
+    queryset = ClassRoom.objects.all()
+    serializer_class = ClassRoomModelSerializer
+
+class ClassRoomDestroyAPIView(DestroyAPIView):
+    queryset = ClassRoom.objects.all()
+    serializer_class = ClassRoomModelSerializer
+    
+class ClassRoomListCreateAPIView(ListCreateAPIView):
+    queryset = ClassRoom.objects.all()
+    serializer_class = ClassRoomModelSerializer
+
+class ClassRoomObjectAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = ClassRoom.objects.all()
+    serializer_class = ClassRoomModelSerializer

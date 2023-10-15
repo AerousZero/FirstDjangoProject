@@ -1,5 +1,19 @@
 from django.urls import path
-from .views import hello_world, MessageView, SimpleStudentView, SimpleStudentListView, ClassRoomDetailAPIView, ClassRoomAPIView, StudentDetailAPIView, StudentAPIView, StudentProfileAPIView, ClassRoomListAPIView , ClassRoomCreateAPIView, ClassRoomRetrieveAPIView, ClassRoomUpdateAPIView, ClassRoomDestroyAPIView, ClassRoomListCreateAPIView ,ClassRoomObjectAPIView
+from rest_framework.routers import DefaultRouter
+
+from .views import hello_world, MessageView, SimpleStudentView, SimpleStudentListView 
+from .views import ClassRoomDetailAPIView, ClassRoomAPIView, StudentDetailAPIView, StudentAPIView, StudentProfileAPIView
+from .views import ClassRoomListAPIView , ClassRoomCreateAPIView, ClassRoomRetrieveAPIView, ClassRoomUpdateAPIView, ClassRoomDestroyAPIView, ClassRoomListCreateAPIView ,ClassRoomObjectAPIView
+from .views import StudentListAPIView , StudentCreateAPIView , StudentRetrieveAPIView, StudentUpdateAPIView, StudentDestroyAPIView, StudentListCreateAPIView, StudentObjectAPIView
+from .views import ClassRoomViewSet, ClassRoomListUpdateViewSet
+
+
+router = DefaultRouter()
+router.register('classroom-viewset', ClassRoomViewSet)
+router.register('classroom-list-update', ClassRoomListUpdateViewSet)
+
+
+
 
 urlpatterns = [
     path('hello-world/', hello_world),
@@ -20,7 +34,7 @@ urls_serializers = [
 
 ]
 
-generic_urls = [
+generic_classroom_urls = [
     path("generic-classroom-list/", ClassRoomListAPIView.as_view()),
     path("generic-classroom-create/", ClassRoomCreateAPIView.as_view()),
     
@@ -33,4 +47,18 @@ generic_urls = [
 
 ]
 
-urlpatterns += urls_serializers + generic_urls
+
+generic_student_urls = [
+    path("generic-student-list/", StudentListAPIView.as_view()),
+    path("generic-student-create/", StudentCreateAPIView.as_view()),
+    
+    path("generic-student-retreive/<int:pk>/", StudentRetrieveAPIView.as_view()),
+    path("generic-student-update/<int:pk>/", StudentUpdateAPIView.as_view()),
+    path("generic-student-destroy/<int:pk>/", StudentDestroyAPIView.as_view()),
+
+    path("generic-student/",StudentListCreateAPIView.as_view()),
+    path("generic-student/<int:pk>/", StudentObjectAPIView.as_view()),
+
+]
+
+urlpatterns += urls_serializers + generic_classroom_urls + generic_student_urls + router.urls

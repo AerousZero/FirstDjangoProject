@@ -2,13 +2,17 @@
 from django.http import JsonResponse
 
 from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView , CreateAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.generics import ListAPIView , CreateAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.viewsets import ModelViewSet 
+from rest_framework.response import Response
 
-from crud.models import Student, ClassRoom, StudentProfile
+
+from crud.models import  ClassRoom, Student, StudentProfile
 
 from .serializers import ClassRoomSerializer , ClassRoomModelSerializer ,StudentModelSerializer, StudentProfileModelSerializer
+
+from .viewsets import ListUpdateViewSet
 
 # Create your views here.
 def hello_world(request):
@@ -169,5 +173,46 @@ class ClassRoomListCreateAPIView(ListCreateAPIView):
     serializer_class = ClassRoomModelSerializer
 
 class ClassRoomObjectAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = ClassRoom.objects.all()
+    serializer_class = ClassRoomModelSerializer
+
+# For Student
+class StudentListAPIView(ListAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentModelSerializer
+
+
+class StudentCreateAPIView(CreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentModelSerializer
+
+
+class StudentRetrieveAPIView(RetrieveAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentModelSerializer
+
+class StudentUpdateAPIView(UpdateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentModelSerializer
+
+class StudentDestroyAPIView(DestroyAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentModelSerializer
+    
+class StudentListCreateAPIView(ListCreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentModelSerializer
+
+class StudentObjectAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentModelSerializer
+
+
+class ClassRoomViewSet(ModelViewSet):
+    queryset = ClassRoom.objects.all()
+    serializer_class = ClassRoomModelSerializer
+
+
+class ClassRoomListUpdateViewSet(ListUpdateViewSet):
     queryset = ClassRoom.objects.all()
     serializer_class = ClassRoomModelSerializer

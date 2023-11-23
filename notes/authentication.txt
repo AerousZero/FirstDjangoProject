@@ -1,0 +1,6 @@
+types of authentication
+
+Basic 
+Session
+Token
+JWT (Json Web Token) refresh and access token

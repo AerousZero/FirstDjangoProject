@@ -1,12 +1,13 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken.views import obtain_auth_token
 
 from .views import hello_world, MessageView, SimpleStudentView, SimpleStudentListView 
 from .views import ClassRoomDetailAPIView, ClassRoomAPIView, StudentDetailAPIView, StudentAPIView, StudentProfileAPIView
 from .views import ClassRoomListAPIView , ClassRoomCreateAPIView, ClassRoomRetrieveAPIView, ClassRoomUpdateAPIView, ClassRoomDestroyAPIView, ClassRoomListCreateAPIView ,ClassRoomObjectAPIView
 from .views import StudentListAPIView , StudentCreateAPIView , StudentRetrieveAPIView, StudentUpdateAPIView, StudentDestroyAPIView, StudentListCreateAPIView, StudentObjectAPIView
 from .views import ClassRoomViewSet, ClassRoomListUpdateViewSet
-
+from.login import UserLoginView
 
 router = DefaultRouter()
 router.register('classroom-viewset', ClassRoomViewSet)
@@ -20,7 +21,8 @@ urlpatterns = [
     path('message/', MessageView.as_view()),
     
     path('simple-student/<int:id>/', SimpleStudentView.as_view()),
-    path('simple-student-list/', SimpleStudentListView.as_view())
+    path('simple-student-list/', SimpleStudentListView.as_view()),
+    path("login/",UserLoginView.as_view, name="login")
 ]
 
 urls_serializers = [

@@ -1,12 +1,16 @@
 
 from django.http import JsonResponse
 
+from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.generics import ListAPIView , CreateAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.viewsets import ModelViewSet 
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.filters import SearchFilter
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
+from rest_framework.decorators import action
 
 
 from crud.models import  ClassRoom, Student, StudentProfile
@@ -21,7 +25,7 @@ from .permissions import IsSuperAdminUser
 def hello_world(request):
     response = {"message":"Hello World"}
     return JsonResponse(response)
-
+ 
 class MessageView(APIView):
     def get(self, *args, **kwargs):
         return Response([
@@ -155,7 +159,7 @@ class ClassRoomListAPIView(ListAPIView):
 
 
 class ClassRoomCreateAPIView(CreateAPIView):
-    queryset = ClassRoom.objects.all()
+    #queryset = ClassRoom.objects.all() not needed in create
     serializer_class = ClassRoomModelSerializer
 
 
@@ -212,6 +216,8 @@ class StudentObjectAPIView(RetrieveUpdateDestroyAPIView):
 
 
 class ClassRoomViewSet(ModelViewSet):
+    #pagination_class = LimitOffSetPagination
+    #pagination_class = PageNumberPagination
     #permission_classes = [IsAuthenticated, ]
     #permission_classes = [AllowAny, ]
     queryset = ClassRoom.objects.all()
@@ -221,9 +227,42 @@ class ClassRoomViewSet(ModelViewSet):
         if self.request.method == "GET":
             return [AllowAny(), ]
         return [IsSuperAdminUser(), ]
-        
+    
+    def grt_serializer_class(self):
+        if self.action == "student":
+            return StudentModelSerializer
+        return ClassRoomModelSerializer
+    
+    @action(detail = True)
+    def student(self, *args, **kwargs):
+        classroom_obj = self.get_object()
+        students = Student.objects.filter(classroom = classroom_obj)
+        ser = self.get_serializer(students, many = True)
+        return Response(ser.data)        
 
 
 class ClassRoomListUpdateViewSet(ListUpdateViewSet):
     queryset = ClassRoom.objects.all()
     serializer_class = ClassRoomModelSerializer
+
+
+
+
+class StudentViewSet(ModelViewSet):
+    #pagination_class = LimitOffsetPagination
+    #pagination_class = PageNumberPagination
+    #permission_classes = [IsAuthenticated, ]
+    #permission_classes = [AllowAny, ]
+    queryset = Student.objects.all()
+    serializer_class = StudentModelSerializer
+    filter_backends = [SearchFilter, DjangoFilterBackend]
+    search_fields = ["name","email"]
+    filterset_fileds = ["age","name","classroom__name"]
+
+    def get_queryset(self):
+        #classroom = self.request.query_params.get("classroom") works in drf not in django
+        classroom = self.request.Get.get("classroom") #works in both
+        if classroom:
+            return Student.objects.filter(classroom_id=classroom)
+        return Student.objects.all
+    

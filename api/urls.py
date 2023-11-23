@@ -6,13 +6,13 @@ from .views import hello_world, MessageView, SimpleStudentView, SimpleStudentLis
 from .views import ClassRoomDetailAPIView, ClassRoomAPIView, StudentDetailAPIView, StudentAPIView, StudentProfileAPIView
 from .views import ClassRoomListAPIView , ClassRoomCreateAPIView, ClassRoomRetrieveAPIView, ClassRoomUpdateAPIView, ClassRoomDestroyAPIView, ClassRoomListCreateAPIView ,ClassRoomObjectAPIView
 from .views import StudentListAPIView , StudentCreateAPIView , StudentRetrieveAPIView, StudentUpdateAPIView, StudentDestroyAPIView, StudentListCreateAPIView, StudentObjectAPIView
-from .views import ClassRoomViewSet, ClassRoomListUpdateViewSet
+from .views import ClassRoomViewSet, ClassRoomListUpdateViewSet, StudentViewSet
 from.login import UserLoginView
 
 router = DefaultRouter()
 router.register('classroom-viewset', ClassRoomViewSet)
 router.register('classroom-list-update', ClassRoomListUpdateViewSet)
-
+router.register('student-viewset', StudentViewSet)
 
 
 
